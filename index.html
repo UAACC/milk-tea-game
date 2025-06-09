@@ -16,21 +16,22 @@
             <div class="score" id="score">SCORE</div>
         </div>
         <div class="game-area">
-            <div class="cup left-cup">
+            <div class="cup left-cup" id="leftCup">
                 <img src="assets/cups/em_cup.png" alt="左奶茶杯" />
+                <div class="cup-content"></div>
                 <div class="cup-label">MILK TEA</div>
             </div>
             <div class="mascot">
-                <img src="assets/deerpapa.png" alt="吉祥物" />
+                <img src="assets/deerpapa.png" alt="吉祥物" id="mascot" />
             </div>
-            <div class="cup right-cup">
+            <div class="cup right-cup" id="rightCup">
                 <img src="assets/cups/em_cup.png" alt="右奶茶杯" />
+                <div class="cup-content"></div>
                 <div class="cup-label">MILK TEA</div>
             </div>
         </div>
         <div class="ingredient-area">
-            <img src="assets/ingredients/xxx.png" class="ingredient-icon" id="ingredientIcon" />
-            <div class="ingredient-label" id="ingredientLabel">INGREDIENT</div>
+            <div class="current-ingredient" id="currentIngredient"></div>
         </div>
     </div>
     <script src="main.js"></script>

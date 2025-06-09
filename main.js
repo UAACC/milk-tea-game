@@ -2,13 +2,8 @@
 const CONFIG = {
     timeLimit: 60,
     ingredients: [
-        { id: 'milk', emoji: '🥛', name: '牛奶', color: '#ffffff', score: 10 },
-        { id: 'tea', emoji: '🍵', name: '茶', color: '#8B4513', score: 15 },
-        { id: 'pearl', emoji: '⚫', name: '珍珠', color: '#000000', score: 20 },
-        { id: 'strawberry', emoji: '🍓', name: '草莓', color: '#ff6b6b', score: 25 },
-        { id: 'mango', emoji: '🥭', name: '芒果', color: '#ffd700', score: 25 },
-        { id: 'coconut', emoji: '🥥', name: '椰果', color: '#f5f5dc', score: 20 },
-        { id: 'ice', emoji: '🧊', name: '冰块', color: '#add8e6', score: 5 }
+        { id: 'sugar', img: 'assets/ingredients/sug.png', name: '糖', color: '#fffbe7', score: 10 },
+        { id: 'bubbles', img: 'assets/ingredients/bbs.png', name: '珍珠', color: '#2d1a0a', score: 20 }
     ]
 };
 
@@ -45,42 +40,28 @@ function updateTimer() {
 function generateNewIngredient() {
     const randomIndex = Math.floor(Math.random() * CONFIG.ingredients.length);
     gameState.currentIngredient = CONFIG.ingredients[randomIndex];
+    // 显示配料图片和名称
+    const ingredient = gameState.currentIngredient;
     document.getElementById('currentIngredient').innerHTML = `
-        <div class="ingredient-item">
-            <span class="emoji">${gameState.currentIngredient.emoji}</span>
-            <span class="name">${gameState.currentIngredient.name}</span>
-        </div>
+        <img src="${ingredient.img}" alt="${ingredient.name}" class="ingredient-icon" />
+        <div class="ingredient-label">${ingredient.name}</div>
     `;
 }
 
 // 添加配料到杯子
-function addIngredient(cupId) {
+function addIngredient(cupSide) {
+    console.log('addIngredient called:', cupSide);
     if (gameState.isGameOver) return;
-    
-    const cup = cupId === 'left' ? gameState.leftCup : gameState.rightCup;
+    const cup = cupSide === 'left' ? gameState.leftCup : gameState.rightCup;
     cup.push(gameState.currentIngredient);
-    
-    // 更新杯子外观
-    updateCupAppearance(cupId);
-    
-    // 生成新的配料
+    updateCupAppearance(cupSide);
     generateNewIngredient();
-
-    // 添加动画效果
-    const cupElement = document.getElementById(cupId + 'Cup');
-    cupElement.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        cupElement.style.transform = 'scale(1)';
-    }, 200);
-
-    // 让吉祥物有反应
-    animateMascot();
 }
 
 // 更新杯子外观
-function updateCupAppearance(cupId) {
-    const cup = cupId === 'left' ? gameState.leftCup : gameState.rightCup;
-    const cupElement = document.getElementById(cupId + 'Cup').querySelector('.cup-content');
+function updateCupAppearance(cupSide) {
+    const cup = cupSide === 'left' ? gameState.leftCup : gameState.rightCup;
+    const cupElement = document.getElementById(cupSide + 'Cup').querySelector('.cup-content');
     
     // 创建渐变背景
     const colors = cup.map(ing => ing.color);
@@ -142,30 +123,21 @@ function restartGame() {
     initGame();
 }
 
-// 添加触摸事件支持
-function addTouchSupport() {
-    const cups = document.querySelectorAll('.tea-cup');
-    cups.forEach(cup => {
-        // 添加点击事件
-        cup.addEventListener('click', (e) => {
-            e.preventDefault();
-            const cupId = cup.id.replace('Cup', '');
-            addIngredient(cupId);
-        });
-
-        // 添加触摸事件
-        cup.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const cupId = cup.id.replace('Cup', '');
-            addIngredient(cupId);
-        });
-    });
+// 绑定互动事件
+function addCupInteraction() {
+    const left = document.querySelector('.left-cup');
+    const right = document.querySelector('.right-cup');
+    console.log('left-cup:', left, 'right-cup:', right);
+    left.addEventListener('click', () => { console.log('left-cup clicked'); addIngredient('left'); });
+    right.addEventListener('click', () => { console.log('right-cup clicked'); addIngredient('right'); });
+    left.addEventListener('touchstart', (e) => { e.preventDefault(); console.log('left-cup touched'); addIngredient('left'); });
+    right.addEventListener('touchstart', (e) => { e.preventDefault(); console.log('right-cup touched'); addIngredient('right'); });
 }
 
 // 初始化游戏
 document.addEventListener('DOMContentLoaded', () => {
     initGame();
-    addTouchSupport();
+    addCupInteraction();
     
     // 添加调试信息
     console.log('游戏初始化完成');
