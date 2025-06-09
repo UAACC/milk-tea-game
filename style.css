@@ -6,19 +6,21 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    touch-action: manipulation;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
 }
 
 .game-container {
-    max-width: 100%;
+    width: 100vw;
     min-height: 100vh;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     position: relative;
+    z-index: 1;
 }
 
 /* 背景层 */
@@ -26,15 +28,16 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
 }
 
 .main-bg {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
+    display: block;
 }
 
 /* 背景动画 */
@@ -138,61 +141,46 @@ body {
     z-index: 1;
 }
 
-.timer {
-    font-size: 24px;
+.timer, .score {
+    background: rgba(255,255,255,0.85);
+    border-radius: 12px;
+    font-size: 2rem;
     font-weight: bold;
-    color: #333;
-    background: #fff;
-    padding: 10px 20px;
-    border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: inline-block;
+    padding: 10px 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 /* 游戏主区域 */
 .game-area {
-    width: 100%;
+    width: 100vw;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 1;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    gap: 8vw;
 }
 
 /* 奶茶杯样式 */
-.tea-cup {
+.cup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.cup img {
     width: 120px;
-    height: 160px;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.tea-cup:active {
-    transform: scale(0.95);
-}
-
-.cup-base {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.cup-base img {
-    width: 100%;
-    height: 100%;
+    height: 180px;
     object-fit: contain;
+    margin-bottom: 8px;
 }
 
-.cup-content {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
+.cup-label {
+    font-size: 1.1rem;
+    color: #6b4c2b;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
 .liquid-layer {
@@ -219,21 +207,16 @@ body {
 
 /* 吉祥物样式 */
 .mascot {
-    width: 150px;
-    height: 150px;
     display: flex;
+    align-items: flex-end;
     justify-content: center;
-    align-items: center;
-    margin: 0 20px;
-    position: relative;
-    z-index: 1;
+    height: 200px;
 }
 
 .mascot img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 120px;
+    height: 180px;
     object-fit: contain;
-    transition: transform 0.3s ease;
 }
 
 /* 当游戏结束时，让吉祥物有反应 */
@@ -248,27 +231,27 @@ body {
 }
 
 /* 配料区域 */
-.ingredients-area {
-    width: 100%;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 1;
-}
-
-.current-ingredient {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-.ingredients-list {
+.ingredient-area {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2vh;
+}
+
+.ingredient-icon {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.ingredient-label {
+    background: rgba(255,255,255,0.85);
+    border-radius: 8px;
+    padding: 6px 24px;
+    font-size: 1.2rem;
+    color: #6b4c2b;
+    font-weight: bold;
 }
 
 /* 结算界面 */
@@ -326,19 +309,20 @@ body {
 }
 
 /* 响应式设计 */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    .ui-top {
+        padding: 16px 4vw 0 4vw;
+    }
     .game-area {
-        flex-direction: column;
-        gap: 20px;
+        gap: 2vw;
     }
-
-    .tea-cup {
-        width: 100px;
-        height: 140px;
+    .cup img, .mascot img {
+        width: 80px;
+        height: 120px;
     }
-
-    .mascot {
-        order: -1;
+    .ingredient-icon {
+        width: 60px;
+        height: 60px;
     }
 }
   

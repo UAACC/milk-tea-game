@@ -7,82 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="background-layer">
+        <img src="assets/backgrounds/background.png" alt="背景" class="main-bg">
+    </div>
     <div class="game-container">
-        <!-- 背景层 -->
-        <div class="background-layer">
-            <img src="assets/backgrounds/main-bg.png" alt="背景" class="main-bg">
+        <div class="ui-top">
+            <div class="timer" id="timer">TIME</div>
+            <div class="score" id="score">SCORE</div>
         </div>
-
-        <!-- 顶部计时器 -->
-        <div class="timer-container">
-            <div class="timer">60</div>
-        </div>
-
-        <!-- 游戏主区域 -->
         <div class="game-area">
-            <!-- 左侧奶茶杯 -->
-            <div class="tea-cup left-cup" id="leftCup">
-                <div class="cup-base">
-                    <img src="assets/cups/cup-base.png" alt="杯子底座">
-                </div>
-                <div class="cup-content">
-                    <!-- 液体层 -->
-                    <div class="liquid-layer"></div>
-                    <!-- 配料层 -->
-                    <div class="ingredients-layer"></div>
-                    <!-- 装饰层 -->
-                    <div class="decorations-layer"></div>
-                </div>
+            <div class="cup left-cup">
+                <img src="assets/cups/em_cup.png" alt="左奶茶杯" />
+                <div class="cup-label">MILK TEA</div>
             </div>
-
-            <!-- 中间吉祥物 -->
             <div class="mascot">
-                <img src="assets/deerpapa.png" alt="奶茶店吉祥物" id="mascot">
+                <img src="assets/deerpapa.png" alt="吉祥物" />
             </div>
-
-            <!-- 右侧奶茶杯 -->
-            <div class="tea-cup right-cup" id="rightCup">
-                <div class="cup-base">
-                    <img src="assets/cups/cup-base.png" alt="杯子底座">
-                </div>
-                <div class="cup-content">
-                    <!-- 液体层 -->
-                    <div class="liquid-layer"></div>
-                    <!-- 配料层 -->
-                    <div class="ingredients-layer"></div>
-                    <!-- 装饰层 -->
-                    <div class="decorations-layer"></div>
-                </div>
+            <div class="cup right-cup">
+                <img src="assets/cups/em_cup.png" alt="右奶茶杯" />
+                <div class="cup-label">MILK TEA</div>
             </div>
         </div>
-
-        <!-- 配料区域 -->
-        <div class="ingredients-area">
-            <div class="current-ingredient" id="currentIngredient">
-                <!-- 当前配料会在这里显示 -->
-            </div>
-            <div class="ingredients-list" id="ingredientsList">
-                <!-- 配料列表会在这里动态生成 -->
-            </div>
-        </div>
-
-        <!-- 结算界面 -->
-        <div class="result-screen" id="resultScreen" style="display: none;">
-            <h2>游戏结束！</h2>
-            <div class="score-container">
-                <div class="left-score">
-                    <h3>左侧奶茶</h3>
-                    <div class="score" id="leftScore">0</div>
-                </div>
-                <div class="right-score">
-                    <h3>右侧奶茶</h3>
-                    <div class="score" id="rightScore">0</div>
-                </div>
-            </div>
-            <button class="restart-btn" onclick="restartGame()">再玩一次</button>
+        <div class="ingredient-area">
+            <img src="assets/ingredients/xxx.png" class="ingredient-icon" id="ingredientIcon" />
+            <div class="ingredient-label" id="ingredientLabel">INGREDIENT</div>
         </div>
     </div>
-
     <script src="main.js"></script>
 </body>
 </html>
