@@ -22,7 +22,7 @@
                 <div class="cup-label">MILK TEA</div>
             </div>
             <div class="mascot">
-                <img src="assets/deerpapa.png" alt="吉祥物" id="mascot" />
+                <img src="assets/pixel_deerpapa.png" alt="吉祥物" id="mascot" />
             </div>
             <div class="cup right-cup" id="rightCup">
                 <img src="assets/cups/em_cup.png" alt="右奶茶杯" />
@@ -33,6 +33,20 @@
         <div class="ingredient-area">
             <div class="current-ingredient" id="currentIngredient"></div>
         </div>
+    </div>
+    <div class="result-screen" id="resultScreen" style="display: none;">
+        <h2>游戏结束！</h2>
+        <div class="score-container">
+            <div class="left-score">
+                <h3>左侧奶茶</h3>
+                <div class="score" id="leftScore">0</div>
+            </div>
+            <div class="right-score">
+                <h3>右侧奶茶</h3>
+                <div class="score" id="rightScore">0</div>
+            </div>
+        </div>
+        <button class="restart-btn" onclick="restartGame()">再玩一次</button>
     </div>
     <script src="main.js"></script>
 </body>

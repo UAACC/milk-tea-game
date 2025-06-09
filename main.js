@@ -54,8 +54,21 @@ function addIngredient(cupSide) {
     if (gameState.isGameOver) return;
     const cup = cupSide === 'left' ? gameState.leftCup : gameState.rightCup;
     cup.push(gameState.currentIngredient);
+    // 动画效果
+    animateCup(cupSide);
     updateCupAppearance(cupSide);
     generateNewIngredient();
+}
+
+function animateCup(cupSide) {
+    const cupElem = document.getElementById(cupSide + 'Cup');
+    cupElem.classList.remove('animate-scale'); // 先移除，防止连续点击无效
+    void cupElem.offsetWidth; // 触发重绘
+    cupElem.classList.add('animate-scale');
+    cupElem.addEventListener('animationend', function handler() {
+        cupElem.classList.remove('animate-scale');
+        cupElem.removeEventListener('animationend', handler);
+    });
 }
 
 // 更新杯子外观

@@ -152,13 +152,17 @@ body {
 
 /* 游戏主区域 */
 .game-area {
+    position: absolute;
+    left: 0;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
     gap: 8vw;
+    /* 让底部对齐桌面 */
+    bottom: calc(100vh - (845 / 1024 * 100vh));
+    /* fallback for browsers that don't support calc with division */
+    bottom: calc(100vh - 82.5vh);
 }
 
 /* 奶茶杯样式 */
@@ -246,9 +250,9 @@ body {
 }
 
 .ingredient-label {
-    background: rgba(255,255,255,0.85);
-    border-radius: 8px;
-    padding: 6px 24px;
+    background: none;
+    border-radius: 0;
+    padding: 0;
     font-size: 1.2rem;
     color: #6b4c2b;
     font-weight: bold;
@@ -306,6 +310,28 @@ body {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
+}
+
+/* 杯子缩放动画 */
+.cup.animate-scale {
+    animation: cupScale 0.25s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes cupScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* 杯子抖动动画（可选） */
+.cup.animate-shake {
+    animation: cupShake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes cupShake {
+    10%, 90% { transform: translateX(-2px); }
+    20%, 80% { transform: translateX(4px); }
+    30%, 50%, 70% { transform: translateX(-8px); }
+    40%, 60% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
 }
 
 /* 响应式设计 */
